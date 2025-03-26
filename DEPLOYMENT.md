@@ -284,7 +284,7 @@ npm run dev
 
 ### 1. Create a GitHub Repository
 
-- [ ] Go to GitHub and create a new repository:
+- [x] Go to GitHub and create a new repository:
   - Visit https://github.com/new
   - Name: reword-this-backend
   - Description: Backend API server for Reword This Chrome Extension
@@ -294,7 +294,7 @@ npm run dev
 
 ### 2. Push Your Backend Code to GitHub
 
-- [ ] Initialize a Git repository in your backend folder:
+- [x] Initialize a Git repository in your backend folder:
 ```bash
 # From the reword-this-backend directory
 git init
@@ -302,7 +302,7 @@ git add .
 git commit -m "Initial backend setup"
 ```
 
-- [ ] Add the GitHub repository as remote:
+- [x] Add the GitHub repository as remote:
 ```bash
 git remote add origin https://github.com/yourusername/reword-this-backend.git
 git branch -M main
@@ -315,10 +315,10 @@ git push -u origin main
 
 ### 4. Create a New Web Service
 
-- [ ] In the Render dashboard, click on "New" and select "Web Service"
-- [ ] Connect your GitHub repository 
-- [ ] Select the repository containing your backend code
-- [ ] Configure the following settings:
+- [x] In the Render dashboard, click on "New" and select "Web Service"
+- [x] Connect your GitHub repository 
+- [x] Select the repository containing your backend code
+- [x] Configure the following settings:
   - Name: reword-this-backend (or your preferred name)
   - Environment: Node
   - Build Command: `npm install`
@@ -327,20 +327,20 @@ git push -u origin main
 
 ### 5. Configure Environment Variables
 
-- [ ] Add your environment variables in the Render dashboard:
+- [x] Add your environment variables in the Render dashboard:
   - OPENAI_API_KEY: your_actual_openai_api_key
   - NODE_ENV: production
 
 ### 6. Deploy the Service
 
-- [ ] Click "Create Web Service" to deploy
-- [ ] Wait for the deployment to complete
-- [ ] Note your Render service URL (e.g., https://reword-this-backend.onrender.com)
+- [x] Click "Create Web Service" to deploy
+- [x] Wait for the deployment to complete
+- [x] Note your Render service URL (e.g., https://reword-this-backend.onrender.com)
 
 ### 7. Test the Deployed API
 
-- [ ] Visit your Render service URL to verify the server is running
-- [ ] Test the `/api/cors-test` endpoint to verify CORS is working correctly
+- [x] Visit your Render service URL to verify the server is running
+- [x] Test the `/api/cors-test` endpoint to verify CORS is working correctly
 
 ## Addressing CORS Issues
 
@@ -364,12 +364,12 @@ git push -u origin main
 
 ### 1. Update API Endpoint in Frontend
 
-- [ ] Open the `src/utils/env.ts` file in the frontend project
-- [ ] No need to modify this file as it reads from environment variables
+- [x] Open the `src/utils/env.ts` file in the frontend project
+- [x] No need to modify this file as it reads from environment variables
 
 ### 2. Update Environment Variables
 
-- [ ] Create or modify `.env.production` in the root of the frontend project:
+- [x] Create or modify `.env.production` in the root of the frontend project:
 
 ```
 # Production environment settings
@@ -381,18 +381,18 @@ VITE_DEFAULT_MODEL=gpt-3.5-turbo
 VITE_MAX_TOKENS=1000
 
 # Set this to your Render backend URL
-VITE_API_ENDPOINT=https://your-render-service-url.onrender.com
+VITE_API_ENDPOINT=https://reword-this.onrender.com
 ```
 
 ### 3. Build for Production
 
-- [ ] Build the Chrome extension for production:
+- [x] Build the Chrome extension for production:
 
 ```bash
 npm run build
 ```
 
-- [ ] The built extension will be in the `dist` folder
+- [x] The built extension will be in the `dist` folder
 
 ## Publishing to the Chrome Web Store
 
