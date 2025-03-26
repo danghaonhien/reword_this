@@ -164,8 +164,11 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
               <div className="flex justify-center relative group">
                 <button
                   onClick={generateBattle}
-                  className="px-4 py-2 bg-accent text-accent-foreground rounded-md 
-                            hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent/50"
+                  className={`px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-accent/50 ${
+                    !usageLimits.isPremium && usageLimits.battlesRemaining <= 0 
+                      ? 'bg-muted text-muted-foreground cursor-not-allowed' 
+                      : 'bg-accent text-accent-foreground hover:bg-accent/90'
+                  }`}
                   disabled={!usageLimits.isPremium && usageLimits.battlesRemaining <= 0}
                 >
                   {!usageLimits.isPremium && usageLimits.battlesRemaining <= 0 ? 'Free Limit Reached' : (!usageLimits.isPremium ? `Start Rewrite Battle (${usageLimits.battlesRemaining}/1)` : 'Start Rewrite Battle')}

@@ -84,6 +84,9 @@ const PopupView: React.FC<PopupViewProps> = ({ selectedText = '' }) => {
   const [copiedHistoryId, setCopiedHistoryId] = useState<string | null>(null)
   const [copiedInline, setCopiedInline] = useState(false)
   const usageLimits = useUsageLimits()
+  // Toast state for limit reached notifications
+  const [showLimitToast, setShowLimitToast] = useState(false)
+  const [limitToastMessage, setLimitToastMessage] = useState('')
   
   // Close the popup window (extension only)
   const closeApp = () => {
@@ -327,7 +330,14 @@ const PopupView: React.FC<PopupViewProps> = ({ selectedText = '' }) => {
   const navigateToBattle = () => {
     // Check if we've reached battle limit before navigating
     if (!usageLimits.isPremium && usageLimits.battlesRemaining <= 0) {
-      alert('You have reached your daily battle limit for the free tier. Please try again tomorrow or upgrade to premium.');
+      // Show toast notification instead of alert
+      setLimitToastMessage('You have reached your daily battle limit for the free tier. Please try again tomorrow or upgrade to premium.');
+      setShowLimitToast(true);
+      
+      // Hide toast after 3 seconds
+      setTimeout(() => {
+        setShowLimitToast(false);
+      }, 3000);
       return;
     }
     setCurrentView('battle');
@@ -339,6 +349,13 @@ const PopupView: React.FC<PopupViewProps> = ({ selectedText = '' }) => {
       <div className="flex-1 overflow-visible relative">
         {/* Reward notification component for displaying new unlocks */}
         <RewardNotification />
+        
+        {/* Limit reached toast notification */}
+        {showLimitToast && (
+          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-popover text-popover-foreground px-4 py-2 rounded-md shadow-md z-50 animate-fade-in-down text-sm">
+            {limitToastMessage}
+          </div>
+        )}
         
         {/* Main content - conditionally render based on current view */}
         <div className="flex-1 h-screen max-h-screen overflow-visible flex flex-col">
