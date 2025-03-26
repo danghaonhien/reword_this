@@ -410,6 +410,39 @@ npm run build
 
 - [x] Identify common issues that may arise during deployment and development.
 
+#### Connection Refused Errors
+
+If you see an error like:
+```
+POST http://localhost:3000/api/rewrite net::ERR_CONNECTION_REFUSED
+```
+
+Follow these steps:
+1. Make sure the backend server is running:
+   ```bash
+   cd reword-this-backend
+   npm run dev
+   ```
+2. Check the CORS configuration in `reword-this-backend/src/index.js` to ensure it allows your frontend origin:
+   ```javascript
+   app.use(cors({
+     origin: [
+       'chrome-extension://*/index.html',
+       'http://localhost:5173',
+       'http://localhost:5174',
+       // Add any other origins you need
+     ],
+     // other settings...
+   }));
+   ```
+3. Verify your Chrome extension's manifest.json has the appropriate host permissions:
+   ```json
+   "host_permissions": [
+     "http://localhost:3000/*"
+   ]
+   ```
+4. Rebuild the extension with `npm run build` and reload it in Chrome.
+
 ### 2. Debugging
 
 - [x] Use debugging tools to troubleshoot issues.

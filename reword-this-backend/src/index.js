@@ -39,6 +39,7 @@ app.use(cors({
     // For development
     'http://localhost:5173',
     'http://localhost:4173',
+    'http://localhost:5174',
     // Add your production extension ID when available
     // 'chrome-extension://your-extension-id'
   ],
