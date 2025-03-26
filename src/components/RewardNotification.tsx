@@ -3,7 +3,7 @@ import { Sparkles, X } from 'lucide-react'
 
 interface NotificationItem {
   id: string;
-  type: 'tone' | 'theme' | 'badge';
+  type: 'tone' | 'theme' ;
   name: string;
   timestamp: number;
 }
@@ -48,18 +48,18 @@ const RewardNotification: React.FC = () => {
         }
         
         // Process badges
-        if (unlockedDetails.badges && unlockedDetails.badges.length > 0) {
-          unlockedDetails.badges.forEach((id: string) => {
-            const newNotification: NotificationItem = {
-              id: `badge-${id}-${Date.now()}`,
-              type: 'badge',
-              name: id, // Ideally we'd get the proper name
-              timestamp: Date.now()
-            }
+        // if (unlockedDetails.badges && unlockedDetails.badges.length > 0) {
+        //   unlockedDetails.badges.forEach((id: string) => {
+        //     const newNotification: NotificationItem = {
+        //       id: `badge-${id}-${Date.now()}`,
+        //       type: 'badge',
+        //       name: id, // Ideally we'd get the proper name
+        //       timestamp: Date.now()
+        //     }
             
-            setNotifications(prev => [...prev, newNotification])
-          })
-        }
+        //     setNotifications(prev => [...prev, newNotification])
+        //   })
+        // }
       }
     }
 
