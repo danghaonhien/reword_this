@@ -61,9 +61,9 @@ const ToneSelector: React.FC<ToneSelectorProps> = ({
   
   return (
     <div className="mb-4">
-      <label className="block text-sm font-medium mb-2 flex items-center gap-1">
-        <span className="w-2 h-2 rounded-full bg-secondary"></span>
-        Select Tone
+      <label className="block text-sm font-medium mb-2 flex items-center gap-1.5">
+        <span className="w-2 h-2 rounded-full bg-primary opacity-90 shadow-sm dark:shadow-[0_0_3px_rgba(255,255,255,0.4)] dark:opacity-95"></span>
+        <span className="dark:text-gray-200">Select Tone</span>
       </label>
       
       <div className="grid grid-cols-3 gap-2 mb-3">

@@ -136,6 +136,57 @@
       button, .button, [role="button"] {
         flex-shrink: 0;
       }
+
+      /* Improve dark mode icon visibility */
+      .dark .w-4.h-4.text-accent, 
+      .theme-dark .w-4.h-4.text-accent {
+        filter: brightness(1.3) !important;
+        opacity: 0.9 !important;
+      }
+
+      /* Improve edit/copy button visibility in dark mode */
+      .dark button.text-secondary, 
+      .dark button.text-muted-foreground,
+      .theme-dark button.text-secondary,
+      .theme-dark button.text-muted-foreground {
+        opacity: 0.85 !important;
+      }
+
+      .dark button.text-secondary:hover, 
+      .dark button.text-muted-foreground:hover,
+      .theme-dark button.text-secondary:hover,
+      .theme-dark button.text-muted-foreground:hover {
+        opacity: 1 !important;
+        filter: brightness(1.2) !important;
+      }
+
+      /* Improve tone selector dot visibility */
+      .dark span.w-2.h-2.rounded-full.bg-accent,
+      .theme-dark span.w-2.h-2.rounded-full.bg-accent {
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
+        opacity: 0.9 !important;
+      }
+
+      /* Make flame icon more visible */
+      .dark svg[data-lucide="Flame"],
+      .theme-dark svg[data-lucide="Flame"] {
+        filter: brightness(1.4) !important;
+        opacity: 0.9 !important;
+      }
+
+      /* Improve edit icon visibility */
+      .dark svg:has(path[d*="11 4H4a2 2 0 0 0-2 2v14"]),
+      .theme-dark svg:has(path[d*="11 4H4a2 2 0 0 0-2 2v14"]) {
+        filter: brightness(1.4) contrast(1.2) !important;
+        opacity: 0.9 !important;
+      }
+
+      /* Improve copy icon visibility */
+      .dark svg:has(rect[width="14"][height="14"][x="8"][y="8"]),
+      .theme-dark svg:has(rect[width="14"][height="14"][x="8"][y="8"]) {
+        filter: brightness(1.4) contrast(1.2) !important;
+        opacity: 0.9 !important;
+      }
     </style>
   </head>
   <body>
@@ -152,5 +203,4 @@
       });
     </script>
   </body>
-</html> 
 </html> 

@@ -468,8 +468,8 @@ const PopupView: React.FC<PopupViewProps> = ({ selectedText = '' }) => {
                         </div>
                       </div>
                       <div className="flex items-center gap-1.5 relative group">
-                        <Flame className="w-4 h-4 text-accent" />
-                        <span className="text-sm font-medium">{streak} day streak</span>
+                        <Flame className="w-4 h-4 text-primary dark:text-accent dark:opacity-90 dark:filter-none dark:shadow-[0_0_3px_rgba(255,255,255,0.15)]" />
+                        <span className="text-sm font-medium dark:text-gray-100">{streak} day streak</span>
                         <Info className="w-3 h-3 text-muted-foreground cursor-help" />
                         <div className="absolute top-full right-0 mt-2 bg-popover text-popover-foreground text-xs p-3 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 w-64">
                           <div className="space-y-3">
@@ -616,29 +616,37 @@ const PopupView: React.FC<PopupViewProps> = ({ selectedText = '' }) => {
                               <button
                                 onClick={rewriteAgain}
                                 className="flex items-center justify-center gap-1 p-1 text-xs 
-                                        text-secondary hover:bg-secondary/10 
-                                        transition-colors rounded"
+                                        text-primary hover:bg-secondary/10 
+                                        transition-colors rounded dark:text-gray-300 dark:hover:text-white dark:hover:brightness-110 relative group"
+                                aria-label="Edit"
+                                title="Edit"
                               >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="dark:stroke-gray-300 dark:group-hover:stroke-white">
                                   <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                                   <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                                 </svg>
-                                {/* Edit */}
+                                <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 bg-popover text-popover-foreground text-xs px-2 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap dark:bg-popover/95 dark:text-gray-100 dark:shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
+                                  Edit
+                                </span>
                               </button>
                               <button
                                 onClick={handleInlineCopy}
-                                className="flex items-center gap-1 p-1 text-xs text-secondary hover:bg-secondary/10 transition-colors rounded"
+                                className="flex items-center gap-1 p-1 text-xs text-primary hover:bg-secondary/10 transition-colors rounded dark:text-gray-300 dark:hover:text-white dark:hover:brightness-110 relative group"
+                                aria-label="Copy to clipboard"
+                                title="Copy to clipboard"
                               >
                                 {copiedInline ? 
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="dark:stroke-gray-300 dark:group-hover:stroke-white">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                   </svg> : 
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="dark:stroke-gray-300 dark:group-hover:stroke-white">
                                     <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
                                     <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
                                   </svg>
                                 }
-                                {/* Copy */}
+                                <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 bg-popover text-popover-foreground text-xs px-2 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap dark:bg-popover/95 dark:text-gray-100 dark:shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
+                                  {copiedInline ? 'Copied!' : 'Copy'}
+                                </span>
                               </button>
                             </div>
                           </div>
@@ -946,28 +954,36 @@ const RewordResult: React.FC<{
               onClick={onRewriteAgain}
               className="flex items-center justify-center gap-1 p-1 text-xs 
                       text-secondary hover:bg-secondary/10 
-                      transition-colors rounded"
+                      transition-colors rounded dark:text-gray-300 dark:hover:text-white dark:hover:brightness-110 relative group"
+              aria-label="Edit"
+              title="Edit"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="dark:stroke-gray-300 dark:group-hover:stroke-white">
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
               </svg>
-              {/* Edit */}
+              <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 bg-popover text-popover-foreground text-xs px-2 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap dark:bg-popover/95 dark:text-gray-100 dark:shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
+                Edit
+              </span>
             </button>
             <button
               onClick={copyToClipboard}
-              className="flex items-center gap-1 p-1 text-xs text-secondary hover:bg-secondary/10 transition-colors rounded"
+              className="flex items-center gap-1 p-1 text-xs text-secondary hover:bg-secondary/10 transition-colors rounded dark:text-gray-300 dark:hover:text-white dark:hover:brightness-110 relative group"
+              aria-label="Copy to clipboard"
+              title="Copy to clipboard"
             >
               {copied ? 
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="dark:stroke-gray-300 dark:group-hover:stroke-white">
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg> : 
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="dark:stroke-gray-300 dark:group-hover:stroke-white">
                   <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
                   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
                 </svg>
               }
-              {/* Copy */}
+              <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 bg-popover text-popover-foreground text-xs px-2 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap dark:bg-popover/95 dark:text-gray-100 dark:shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
+                {copied ? 'Copied!' : 'Copy'}
+              </span>
             </button>
           </div>
         </div>
