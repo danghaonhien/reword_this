@@ -75,6 +75,8 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
       return;
     }
     
+    // Reset selected version
+    setSelectedVersion(null);
     setIsLoading(true)
     
     try {
@@ -230,7 +232,7 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
                   className={`px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-accent/50 ${
                     !usageLimits.isPremium && usageLimits.battlesRemaining <= 0 
                       ? 'bg-muted text-muted-foreground cursor-not-allowed' 
-                      : 'bg-primary text-accent-foreground hover:bg-accent/90'
+                      : 'bg-accent text-accent-foreground hover:bg-accent/90'
                   }`}
                   disabled={!usageLimits.isPremium && usageLimits.battlesRemaining <= 0}
                 >
@@ -280,12 +282,30 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
         <>
           <div className="flex items-center justify-between mb-3 sticky top-0 bg-background pt-1 pb-2 ">
             <h3 className="text-sm font-medium">Choose Your Favorite Version</h3>
-            {/* <button 
-              onClick={onRewriteAgain}
-              className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1"
+            <button 
+              onClick={generateBattle}
+              className="text-xs text-primary hover:text-accent bg-accent/10 hover:bg-accent/20 transition-colors px-2 py-1 rounded flex items-center gap-1 relative group"
+              disabled={isLoading || (!usageLimits.isPremium && usageLimits.battlesRemaining <= 0)}
+              title={!usageLimits.isPremium ? `${usageLimits.battlesRemaining} battles remaining today` : "Generate a new battle"}
             >
-              <RefreshCw className="w-3 h-3" /> Try Again
-            </button> */}
+              {isLoading ? (
+                <>
+                  <div className="w-3 h-3 border-t-2 border-accent rounded-full animate-spin mr-1"></div>
+                  Generating...
+                </>
+              ) : (
+                <>
+                  <RefreshCw className="w-3 h-3" /> Battle Again
+                </>
+              )}
+              {!usageLimits.isPremium && !isLoading && (
+                <div className="absolute top-[calc(100%+5px)] right-0 w-40
+                           bg-popover text-popover-foreground text-xs p-1.5 rounded shadow-md
+                           opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-left z-[100]">
+                  Uses 1 of your daily battle limit ({usageLimits.battlesRemaining} remaining)
+                </div>
+              )}
+            </button>
           </div>
 
           {isLoading ? (
