@@ -774,7 +774,7 @@ const PopupView: React.FC<PopupViewProps> = ({ selectedText = '' }) => {
             <span className="absolute right-[calc(100%+8px)] top-0 opacity-0 group-hover:opacity-100 transition-opacity bg-popover text-popover-foreground text-xs px-2 py-1 rounded pointer-events-none whitespace-nowrap">
               {!usageLimits.isPremium && usageLimits.battlesRemaining <= 0 
                 ? "Free Limit Reached" 
-                : `Rewrite Battle${!usageLimits.isPremium ? ` (${usageLimits.battlesRemaining}/1)` : ''}`}
+                : `Rewrite Battle${!usageLimits.isPremium ? ` (${usageLimits.battlesRemaining}/3)` : ''}`}
             </span>
             {/* Tooltip explaining battle limit */}
             <div className="absolute right-[calc(100%+8px)] top-0 w-64
@@ -788,7 +788,7 @@ const PopupView: React.FC<PopupViewProps> = ({ selectedText = '' }) => {
               </div>
               {!usageLimits.isPremium && usageLimits.battlesRemaining > 0 && (
                 <div className="text-xs mt-1.5 font-medium text-accent">
-                  Free Tier: 1 battle per day
+                  Free Tier: 3 battles per day
                 </div>
               )}
             </div>

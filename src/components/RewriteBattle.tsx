@@ -171,7 +171,7 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
                   }`}
                   disabled={!usageLimits.isPremium && usageLimits.battlesRemaining <= 0}
                 >
-                  {!usageLimits.isPremium && usageLimits.battlesRemaining <= 0 ? 'Free Limit Reached' : (!usageLimits.isPremium ? `Start Rewrite Battle (${usageLimits.battlesRemaining}/1)` : 'Start Rewrite Battle')}
+                  {!usageLimits.isPremium && usageLimits.battlesRemaining <= 0 ? 'Free Limit Reached' : (!usageLimits.isPremium ? `Start Rewrite Battle (${usageLimits.battlesRemaining}/3)` : 'Start Rewrite Battle')}
                 </button>
                 
                 {/* Tooltip explaining battle limit */}
@@ -189,7 +189,7 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
                   </div>
                   {!usageLimits.isPremium && usageLimits.battlesRemaining > 0 && (
                     <div className="text-xs mt-1.5 font-medium text-accent">
-                      Free Tier: 1 battle per day
+                      Free Tier: 3 battles per day
                     </div>
                   )}
                 </div>

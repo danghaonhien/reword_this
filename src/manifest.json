@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Reword This",
   "version": "1.0.0",
-  "description": "AI-Powered Text Rewriting Chrome Extension",
+  "description": "AI-powered rephrasing for any text on the web",
   "action": {
     "default_popup": "index.html",
     "default_icon": {

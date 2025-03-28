@@ -12,8 +12,8 @@ Our goal is to:
 **Includes:**
 - 10 rewrites per day
 - Access to 4 basic tones (Clarity, Friendly, Formal, Gen Z)
-- Surprise Me mode (limited to 1/day)
-- Rewrite Battle mode (limited to 1/day)
+- Surprise Me mode (limited to 3/day)
+- Rewrite Battle mode (limited to 3/day)
 - Local XP tracking
 
 **Why it works:**

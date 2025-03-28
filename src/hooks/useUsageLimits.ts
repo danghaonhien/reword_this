@@ -4,8 +4,8 @@ import { isPremium } from '@/utils/env';
 // Free tier limits from pricing docs
 const FREE_TIER_LIMITS = {
   DAILY_REWRITES: 10,
-  DAILY_SURPRISE_ME: 1,
-  DAILY_BATTLES: 1
+  DAILY_SURPRISE_ME: 3,
+  DAILY_BATTLES: 3
 };
 
 // Create storage keys to avoid duplication
