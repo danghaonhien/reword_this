@@ -34,6 +34,8 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
   const [tonePair, setTonePair] = useState(TONE_PAIRS[0])
   const [hasBattled, setHasBattled] = useState(false)
   const [showSuccessToast, setShowSuccessToast] = useState(false)
+  const [showCopyToast, setShowCopyToast] = useState(false)
+  const [copyToastMessage, setCopyToastMessage] = useState('')
   
   // Use the gameification hooks to track battles and add XP
   const { trackBattle, addXP } = useGameification()
@@ -107,11 +109,28 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
   const copyToClipboard = (text: string, version: string) => {
     navigator.clipboard.writeText(text)
     setCopied(version)
-    setTimeout(() => setCopied(null), 2000)
+    
+    // Show copy toast
+    setCopyToastMessage(`Text copied to clipboard!`);
+    setShowCopyToast(true);
+    
+    setTimeout(() => {
+      setCopied(null)
+      setShowCopyToast(false)
+    }, 2000)
   }
 
   const selectVersion = (version: 'A' | 'B') => {
     setSelectedVersion(version)
+    
+    // Copy the selected text to clipboard
+    const textToCopy = version === 'A' ? versionA : versionB;
+    navigator.clipboard.writeText(textToCopy);
+    setCopied(version);
+    
+    // Show copy toast notification
+    setCopyToastMessage(`${version === 'A' ? tonePair.a.name : tonePair.b.name} version copied to clipboard!`);
+    setShowCopyToast(true);
     
     // Track battle in gameification system with explicit tone IDs
     if (version === 'A') {
@@ -131,9 +150,9 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
       console.log(`Battle tracked: ${winnerTone} wins over ${loserTone}`);
     }
     
-    // Add a small delay to show the selection before returning to input view
+    // We're keeping the selected state visible and only hiding the copy toast
     setTimeout(() => {
-      setSelectedVersion(null)
+      setShowCopyToast(false)
       // After selecting, return to input view
       onRewriteAgain()
     }, 1500) // Increased from 1000ms to 1500ms to give user more time to see selection
@@ -149,6 +168,16 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
       {showSuccessToast && (
         <div className="absolute top-0 left-0 right-0 mx-auto w-max bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 px-4 py-2 rounded-md shadow-md z-50 animate-fade-in-down">
           🎉 Battle mission progress updated! Keep going!
+        </div>
+      )}
+      
+      {/* Copy Toast Notification */}
+      {showCopyToast && (
+        <div className="absolute top-0 left-0 right-0 mx-auto w-max bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 px-4 py-2 rounded-md shadow-md z-50 animate-fade-in-down">
+          <div className="flex items-center gap-2">
+            <CheckIcon className="w-4 h-4" /> 
+            {copyToastMessage}
+          </div>
         </div>
       )}
     
@@ -238,20 +267,27 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
                     <span className="text-xs font-medium px-2 py-0.5 bg-secondary/20 rounded-full">{tonePair.a.name} Tone</span>
                     <p className="text-xs text-muted-foreground mt-1 ml-1">{tonePair.a.description}</p>
                   </div>
-                  <button 
-                    onClick={() => copyToClipboard(versionA, 'A')}
-                    className="text-muted-foreground hover:text-foreground p-1 rounded-sm"
-                  >
-                    {copied === 'A' ? <CheckIcon className="w-3 h-3" /> : <CopyIcon className="w-3 h-3" />}
-                  </button>
+                  <div className={`w-20 flex items-center justify-end gap-1 ${selectedVersion === 'A' ? 'text-primary' : 'text-transparent'}`}>
+                    <CheckIcon className="w-4 h-4" />
+                    <span className="text-xs font-medium">Selected</span>
+                  </div>
                 </div>
                 <p className="text-sm mt-2">{versionA}</p>
                 <button
                   onClick={() => selectVersion('A')}
                   className="mt-3 w-full py-1 px-2 text-xs bg-secondary text-secondary-foreground rounded-md 
-                            hover:bg-secondary/90 focus:outline-none focus:ring-1 focus:ring-secondary/50"
+                            hover:bg-secondary/90 focus:outline-none focus:ring-1 focus:ring-secondary/50
+                            flex items-center justify-center gap-1"
                 >
-                  {selectedVersion === 'A' ? 'Selected!' : `Select ${tonePair.a.name} Version`}
+                  {selectedVersion === 'A' ? (
+                    <>
+                      <CheckIcon className="w-3 h-3" /> Winner!
+                    </>
+                  ) : (
+                    <>
+                      Select & Copy {tonePair.a.name} Version <CopyIcon className="w-3 h-3 ml-1" />
+                    </>
+                  )}
                 </button>
               </div>
 
@@ -262,20 +298,27 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
                     <span className="text-xs font-medium px-2 py-0.5 bg-accent/20 rounded-full">{tonePair.b.name} Tone</span>
                     <p className="text-xs text-muted-foreground mt-1 ml-1">{tonePair.b.description}</p>
                   </div>
-                  <button 
-                    onClick={() => copyToClipboard(versionB, 'B')}
-                    className="text-muted-foreground hover:text-foreground p-1 rounded-sm"
-                  >
-                    {copied === 'B' ? <CheckIcon className="w-3 h-3" /> : <CopyIcon className="w-3 h-3" />}
-                  </button>
+                  <div className={`w-20 flex items-center justify-end gap-1 ${selectedVersion === 'B' ? 'text-primary' : 'text-transparent'}`}>
+                    <CheckIcon className="w-4 h-4" />
+                    <span className="text-xs font-medium">Selected</span>
+                  </div>
                 </div>
                 <p className="text-sm mt-2">{versionB}</p>
                 <button
                   onClick={() => selectVersion('B')}
                   className="mt-3 w-full py-1 px-2 text-xs bg-accent text-accent-foreground rounded-md 
-                            hover:bg-accent/90 focus:outline-none focus:ring-1 focus:ring-accent/50"
+                            hover:bg-accent/90 focus:outline-none focus:ring-1 focus:ring-accent/50
+                            flex items-center justify-center gap-1"
                 >
-                  {selectedVersion === 'B' ? 'Selected!' : `Select ${tonePair.b.name} Version`}
+                  {selectedVersion === 'B' ? (
+                    <>
+                      <CheckIcon className="w-3 h-3" /> Winner!
+                    </>
+                  ) : (
+                    <>
+                      Select & Copy {tonePair.b.name} Version <CopyIcon className="w-3 h-3 ml-1" />
+                    </>
+                  )}
                 </button>
               </div>
 
