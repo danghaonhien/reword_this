@@ -182,7 +182,7 @@ const RewardsPanel: React.FC<RewardsPanelProps> = ({ onBack }) => {
         </div>
       </div>
 
-      <div className="p-3 max-h-[450px] overflow-y-auto custom-scrollbar">
+      <div className="p-3 max-h-[340px] overflow-y-auto custom-scrollbar">
         {activeTab === 'tones' && (
           <div className="space-y-3">
             <div className="text-xs text-muted-foreground mb-2">

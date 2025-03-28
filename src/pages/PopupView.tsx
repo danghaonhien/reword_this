@@ -612,44 +612,41 @@ const PopupView: React.FC<PopupViewProps> = ({ selectedText = '' }) => {
                         <div className="bg-card border border-border rounded-md p-4">
                           <div className="flex justify-between items-center mb-3">
                             <h3 className="text-sm font-medium">Rewritten with <span className="capitalize">{selectedTone}</span> tone</h3>
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={rewriteAgain}
+                                className="flex items-center justify-center gap-1 p-1 text-xs 
+                                        text-secondary hover:bg-secondary/10 
+                                        transition-colors rounded relative group"
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                </svg>
+                                {/* Edit */}
+                                <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-popover text-popover-foreground text-xs rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">Edit</span>
+                              </button>
+                              <button
+                                onClick={handleInlineCopy}
+                                className="flex items-center gap-1 p-1 text-xs text-secondary hover:bg-secondary/10 transition-colors rounded relative group"
+                              >
+                                {copiedInline ? 
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                  </svg> : 
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                                  </svg>
+                                }
+                                {/* Copy */}
+                                <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-popover text-popover-foreground text-xs rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">{copiedInline ? 'Copied!' : 'Copy'}</span>
+                              </button>
+                            </div>
                           </div>
                           
-                          <div className="max-h-[240px] overflow-y-auto ">
+                          <div className="max-h-[200px] overflow-hidden custom-scrollbar pr-1">
                             <p className="text-sm whitespace-pre-wrap">{rewrite}</p>
-                          </div>
-                          
-                          <div className="flex justify-end gap-2 mt-3 pt-2 border-t border-border">
-                            <button
-                              onClick={() => {
-                                setRewrite('')
-                                setIsRewriting(false)
-                              }}
-                              className="flex items-center gap-1 text-xs px-2 py-1 rounded text-muted-foreground hover:text-foreground"
-                              title="Edit original text"
-                            >
-                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                              </svg>
-                              Edit
-                            </button>
-                            <button
-                              onClick={handleInlineCopy}
-                              className="flex items-center gap-1 text-xs px-2 py-1 rounded text-muted-foreground hover:text-foreground"
-                              title="Copy to clipboard"
-                            >
-                              {copiedInline ? (
-                                <>
-                                  <Check className="w-3 h-3" />
-                                  Copied!
-                                </>
-                              ) : (
-                                <>
-                                  <Copy className="w-3 h-3" />
-                                  Copy
-                                </>
-                              )}
-                            </button>
                           </div>
                         </div>
                       </div>
@@ -801,30 +798,7 @@ const PopupView: React.FC<PopupViewProps> = ({ selectedText = '' }) => {
             </span>
           </div>
           
-          <div className="relative group">
-            <button 
-              onClick={() => setCurrentView('history')}
-              className={`p-2 rounded-full ${currentView === 'history' ? 'bg-primary text-primary-foreground' : 'hover:bg-muted/50 text-muted-foreground'}`}
-            >
-              <History className="w-4 h-4" />
-            </button>
-            <span className="absolute right-[calc(100%+8px)] top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-popover text-popover-foreground text-xs px-2 py-1 rounded pointer-events-none whitespace-nowrap">
-              History
-            </span>
-          </div>
-        </div>
-        
-        {/* App name vertically centered */}
-        <div className="flex flex-col items-center my-auto">
-          <div className="vertical-text text-primary font-medium tracking-widest text-sm">
-            <div className="rotate-180" style={{ writingMode: 'vertical-rl' }}>
-              Reword This
-            </div>
-          </div>
-        </div>
-        
-        {/* Bottom controls */}
-        <div className="flex flex-col items-center gap-3 mt-auto">
+          {/* Rewards tab moved after Theme */}
           <div className="relative group">
             <button
               onClick={() => setCurrentView('rewards')}
@@ -838,14 +812,37 @@ const PopupView: React.FC<PopupViewProps> = ({ selectedText = '' }) => {
           </div>
           
           <div className="relative group">
-            <button
-              onClick={closeApp}
-              className="p-2 rounded-full hover:bg-primary/20 text-primary"
+            <button 
+              onClick={() => setCurrentView('history')}
+              className={`p-2 rounded-full ${currentView === 'history' ? 'bg-primary text-primary-foreground' : 'hover:bg-muted/50 text-muted-foreground'}`}
             >
-              <X className="w-4 h-4" />
+              <History className="w-4 h-4" />
+            </button>
+            <span className="absolute right-[calc(100%+8px)] top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-popover text-popover-foreground text-xs px-2 py-1 rounded pointer-events-none whitespace-nowrap">
+              History
+            </span>
+          </div>
+        </div>
+        
+        {/* Remove App name from center */}
+        
+        {/* Bottom controls */}
+        <div className="flex flex-col items-center gap-3 mt-auto">
+          {/* App name moved above logo */}
+          <div className="vertical-text text-primary font-medium tracking-widest text-sm mb-2">
+            <div className="rotate-180" style={{ writingMode: 'vertical-rl' }}>
+              Reword This
+            </div>
+          </div>
+          
+          <div className="relative group">
+            <button
+              className="p-2 rounded-full hover:bg-primary/20"
+            >
+              <img src="/reword-this-logo.svg" alt="Reword This Logo" className="w-6 h-6" />
             </button>
             <span className="absolute right-[calc(100%+8px)] top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-popover text-popover-foreground text-xs px-2 py-1 rounded pointer-events-none whitespace-nowrap z-10">
-              Close
+              Reword This
             </span>
           </div>
         </div>
@@ -946,24 +943,41 @@ const RewordResult: React.FC<{
       <div className="bg-card border border-border rounded-md p-4">
         <div className="flex justify-between items-center mb-3">
           <h3 className="text-sm font-medium">Rewritten with <span className="capitalize">{tone}</span> tone</h3>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onRewriteAgain}
+              className="flex items-center justify-center gap-1 p-1 text-xs 
+                      text-secondary hover:bg-secondary/10 
+                      transition-colors rounded relative group"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+              </svg>
+              {/* Edit */}
+              <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-popover text-popover-foreground text-xs rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">Edit</span>
+            </button>
+            <button
+              onClick={copyToClipboard}
+              className="flex items-center gap-1 p-1 text-xs text-secondary hover:bg-secondary/10 transition-colors rounded relative group"
+            >
+              {copied ? 
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg> : 
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                </svg>
+              }
+              {/* Copy */}
+              <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-popover text-popover-foreground text-xs rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">{copied ? 'Copied!' : 'Copy'}</span>
+            </button>
+          </div>
         </div>
         
-        <div className="max-h-[250px] overflow-y-auto custom-scrollbar pr-1">
+        <div className="max-h-[200px] overflow-hidden custom-scrollbar pr-1">
           <p className="text-sm whitespace-pre-wrap">{rewrittenText}</p>
-        </div>
-        
-        <div className="flex justify-end gap-2 mt-3 pt-2 border-t border-border">
-          <button
-            onClick={copyToClipboard}
-            className="flex items-center gap-1 text-xs px-2 py-1 rounded text-muted-foreground hover:text-foreground"
-            title="Copy to clipboard"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-            </svg>
-            {copied ? 'Copied!' : 'Copy'}
-          </button>
         </div>
       </div>
       

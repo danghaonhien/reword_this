@@ -72,17 +72,29 @@ const RewriteOutput: React.FC<RewriteOutputProps> = ({
       <div className="flex justify-between items-center mb-2">
         <h3 className="text-sm font-medium capitalize flex items-center gap-1">
           <span className="w-2 h-2 rounded-full bg-accent"></span>
-          {tone === 'surprise' ? 'Surprise tone' : `${tone} tone`}
+          Rewritten with {tone === 'surprise' ? 'Surprise' : tone} tone
         </h3>
-        <button 
-          onClick={handleCopy}
-          className="flex items-center gap-1 px-2 py-1 text-xs rounded-md bg-secondary/20 text-secondary hover:bg-secondary/30 transition-colors"
-        >
-          {copied ? 
-            <><Check className="w-3 h-3" /> Copied</> : 
-            <><Copy className="w-3 h-3" /> Copy</>
-          }
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onRewriteAgain}
+            className="flex items-center justify-center gap-1 p-1 text-xs 
+                    text-secondary hover:bg-secondary/10 
+                    transition-colors rounded"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Edit
+          </button>
+          <button 
+            onClick={handleCopy}
+            className="flex items-center gap-1 p-1 text-xs text-secondary hover:bg-secondary/10 transition-colors rounded"
+          >
+            {copied ? 
+              <Check className="w-4 h-4" /> : 
+              <Copy className="w-4 h-4" />
+            }
+            Copy
+          </button>
+        </div>
       </div>
 
       <div className="bg-card border border-border rounded-md p-3 mb-4 text-sm overflow-auto max-h-[200px] shadow-sm">
@@ -99,15 +111,6 @@ const RewriteOutput: React.FC<RewriteOutputProps> = ({
       </div>
 
       <div className="flex gap-2 mt-auto">
-        <button
-          onClick={onRewriteAgain}
-          className="flex items-center justify-center gap-1 py-2 px-3 
-                   bg-secondary/20 text-secondary hover:bg-secondary/30 
-                   transition-colors border border-border/60 rounded-md flex-1"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Try Different Tone
-        </button>
         <button
           onClick={onRewriteAgain}
           className="flex items-center justify-center gap-1 py-2 px-3 

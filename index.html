@@ -35,10 +35,122 @@
       .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
         background: rgba(180, 180, 180, 0.8);
       }
+      
+      /* Add minimum size to the popup */
+      html, body {
+        min-width: 420px !important;
+        min-height: 600px !important;
+        width: 100%;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-color: white !important;
+        color: black !important;
+        overflow: hidden !important;
+      }
+      
+      #root {
+        min-width: 420px !important;
+        width: 100%;
+        height: 100%;
+        background-color: white !important;
+        color: black !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 16px !important;
+        position: relative;
+        overflow: hidden !important;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      /* Fix tooltips being cut off */
+      [role="tooltip"],
+      [data-tooltip],
+      [class*="tooltip"],
+      [class*="popover"],
+      [class*="dropdown"],
+      [class*="popup"] {
+        overflow: visible !important;
+        z-index: 9999 !important;
+        position: absolute !important;
+      }
+      
+      /* Make sure tooltip containers allow overflow */
+      *:has([role="tooltip"]),
+      *:has([data-tooltip]),
+      *:has([class*="tooltip"]),
+      *:has([class*="popover"]),
+      *:has([class*="dropdown"]),
+      *:has([class*="popup"]) {
+        overflow: visible !important;
+      }
+      
+      /* Target common container classes for tooltips */
+      .tooltip-container,
+      .popover-container,
+      .tooltip-wrapper,
+      .popover-wrapper,
+      .tippy-box,
+      .tippy-content,
+      [class*="tooltip-container"],
+      [class*="popover-container"],
+      [class*="tooltip-wrapper"],
+      [class*="popover-wrapper"] {
+        overflow: visible !important;
+        z-index: 9999 !important;
+      }
+      
+      /* Ensure body allows tooltips to overflow */
+      body {
+        overflow-x: visible !important;
+      }
+      
+      /* Tooltip positioning fix */
+      .tooltip-arrow,
+      .tippy-arrow,
+      [class*="tooltip-arrow"],
+      [class*="popover-arrow"] {
+        z-index: 10000 !important;
+      }
+      
+      /* Make textarea and content areas adapt to available space */
+      textarea, .text-area, [role="textbox"], [contenteditable="true"] {
+        max-height: 200px !important;
+        min-height: 80px !important;
+        flex-shrink: 1;
+        resize: none !important;
+      }
+       
+    /* Fix for rewrite output height */
+    .bg-card.border.border-border.rounded-md.p-4 > div[class*="max-h-"],
+  .bg-card.border.rounded-md.p-4 > div[class*="max-h-"],
+  .bg-card.border.border-border.rounded-md.p-3 > div[class*="max-h-"],
+  .bg-card.border.rounded-md.p-3 > div[class*="max-h-"] {
+    height: 140px !important;
+    max-height: 140px !important;
+    overflow-y: auto !important;
+  }
+   
+   
+      /* Make buttons align to bottom */
+      button, .button, [role="button"] {
+        flex-shrink: 0;
+      }
     </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Force a repaint after load
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          document.body.style.display = 'none';
+          document.body.offsetHeight; // Force reflow
+          document.body.style.display = '';
+        }, 100);
+      });
+    </script>
   </body>
+</html> 
 </html> 
