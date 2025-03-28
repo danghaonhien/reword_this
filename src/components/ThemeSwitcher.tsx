@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useGameification } from '../hooks/useGameification'
 import { Palette } from 'lucide-react'
 import { Theme } from '../hooks/gameificationTypes'
@@ -8,6 +8,28 @@ const ThemeSwitcher: React.FC = () => {
   const { themes, activeTheme, setActiveTheme } = useGameification()
   const [isOpen, setIsOpen] = useState(false)
   const [recentlyUnlocked, setRecentlyUnlocked] = useState<string[]>([])
+  const dropdownRef = useRef<HTMLDivElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+
+  // Handle clicking outside to close the dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isOpen && 
+        dropdownRef.current && 
+        buttonRef.current && 
+        !dropdownRef.current.contains(event.target as Node) && 
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
 
   // Listen for reward unlock events to highlight newly unlocked themes
   useEffect(() => {
@@ -101,13 +123,13 @@ const ThemeSwitcher: React.FC = () => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="p-0 rounded-full w-full h-full justify-center items-center" 
-       
+        ref={buttonRef}
       >
         <Palette className="w-4 h-4" />
       </button>
 
       {isOpen && (
-        <div className="absolute right-[calc(100%+2px)] top-0 w-48 rounded-md shadow-lg bg-popover border border-border z-50">
+        <div className="absolute right-[calc(100%+2px)] top-0 w-48 rounded-md shadow-lg bg-popover border border-border z-50" ref={dropdownRef}>
           <div className="py-1 px-2">
             <div className="text-xs font-medium text-muted-foreground mb-2 px-2 pt-2">
               Theme
