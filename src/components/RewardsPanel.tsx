@@ -182,7 +182,7 @@ const RewardsPanel: React.FC<RewardsPanelProps> = ({ onBack }) => {
         </div>
       </div>
 
-      <div className="p-3 max-h-[340px] overflow-y-auto custom-scrollbar">
+      <div className="p-3 max-h-[350px] overflow-y-auto custom-scrollbar">
         {activeTab === 'tones' && (
           <div className="space-y-3">
             <div className="text-xs text-muted-foreground mb-2">
@@ -339,7 +339,7 @@ const RewardsPanel: React.FC<RewardsPanelProps> = ({ onBack }) => {
                       {mission.description}
                     </div>
                   </div>
-                  <div className="text-xxs px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
+                  <div className="text-xxs px-1.5 py-0.5 rounded bg-muted  whitespace-nowrap">
                     {mission.reward.type === 'xp'
                       ? `+${mission.reward.value} XP`
                       : `+${mission.reward.value} Streak`}
