@@ -833,7 +833,7 @@ const PopupView: React.FC<PopupViewProps> = ({ selectedText = '' }) => {
         {/* Remove App name from center */}
         
         {/* Bottom controls */}
-        <div className="flex flex-col items-center gap-3 mt-auto">
+        <div className="flex flex-col items-center gap-0 mt-auto">
           {/* App name moved above logo */}
           <div className="vertical-text text-primary font-medium tracking-widest text-sm mb-2">
             <div className="rotate-180" style={{ writingMode: 'vertical-rl' }}>
