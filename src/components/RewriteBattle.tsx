@@ -132,6 +132,10 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
     setCopyToastMessage(`${version === 'A' ? tonePair.a.name : tonePair.b.name} version copied to clipboard!`);
     setShowCopyToast(true);
     
+    // Save selected version to history
+    const tone = version === 'A' ? tonePair.a.name.toLowerCase() : tonePair.b.name.toLowerCase();
+    saveToHistory(originalText, textToCopy, tone);
+    
     // Track battle in gameification system with explicit tone IDs
     if (version === 'A') {
       // Convert tone name to lowercase ID format for tracking
@@ -156,6 +160,36 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
       // After selecting, return to input view
       onRewriteAgain()
     }, 1500) // Increased from 1000ms to 1500ms to give user more time to see selection
+  }
+
+  // Function to save to history (similar to the one in PopupView.tsx)
+  const saveToHistory = (original: string, rewritten: string, tone: string) => {
+    try {
+      const storedHistory = localStorage.getItem('reword-history')
+      const history = storedHistory ? JSON.parse(storedHistory) : []
+      
+      // Add new item to history
+      const newItem = {
+        id: `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
+        originalText: original,
+        rewrittenText: rewritten,
+        tone: tone,
+        timestamp: Date.now()
+      }
+      
+      // Add to start of array (newest first)
+      const updatedHistory = [newItem, ...history].slice(0, 100) // Keep only the latest 100 items
+      
+      // Save back to localStorage
+      localStorage.setItem('reword-history', JSON.stringify(updatedHistory))
+      
+      // Dispatch event to notify other components
+      window.dispatchEvent(new Event('rewordHistoryUpdated'))
+      
+      console.log('Battle result saved to history');
+    } catch (error) {
+      console.error('Error saving to history:', error)
+    }
   }
 
   const toggleOriginalText = () => {
@@ -196,7 +230,7 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
                   className={`px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-accent/50 ${
                     !usageLimits.isPremium && usageLimits.battlesRemaining <= 0 
                       ? 'bg-muted text-muted-foreground cursor-not-allowed' 
-                      : 'bg-accent text-accent-foreground hover:bg-accent/90'
+                      : 'bg-primary text-accent-foreground hover:bg-accent/90'
                   }`}
                   disabled={!usageLimits.isPremium && usageLimits.battlesRemaining <= 0}
                 >
