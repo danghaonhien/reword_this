@@ -617,18 +617,17 @@ const PopupView: React.FC<PopupViewProps> = ({ selectedText = '' }) => {
                                 onClick={rewriteAgain}
                                 className="flex items-center justify-center gap-1 p-1 text-xs 
                                         text-secondary hover:bg-secondary/10 
-                                        transition-colors rounded relative group"
+                                        transition-colors rounded"
                               >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                   <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                                   <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                                 </svg>
                                 {/* Edit */}
-                                <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-popover text-popover-foreground text-xs rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">Edit</span>
                               </button>
                               <button
                                 onClick={handleInlineCopy}
-                                className="flex items-center gap-1 p-1 text-xs text-secondary hover:bg-secondary/10 transition-colors rounded relative group"
+                                className="flex items-center gap-1 p-1 text-xs text-secondary hover:bg-secondary/10 transition-colors rounded"
                               >
                                 {copiedInline ? 
                                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -640,7 +639,6 @@ const PopupView: React.FC<PopupViewProps> = ({ selectedText = '' }) => {
                                   </svg>
                                 }
                                 {/* Copy */}
-                                <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-popover text-popover-foreground text-xs rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">{copiedInline ? 'Copied!' : 'Copy'}</span>
                               </button>
                             </div>
                           </div>
@@ -948,18 +946,17 @@ const RewordResult: React.FC<{
               onClick={onRewriteAgain}
               className="flex items-center justify-center gap-1 p-1 text-xs 
                       text-secondary hover:bg-secondary/10 
-                      transition-colors rounded relative group"
+                      transition-colors rounded"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
               </svg>
               {/* Edit */}
-              <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-popover text-popover-foreground text-xs rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">Edit</span>
             </button>
             <button
               onClick={copyToClipboard}
-              className="flex items-center gap-1 p-1 text-xs text-secondary hover:bg-secondary/10 transition-colors rounded relative group"
+              className="flex items-center gap-1 p-1 text-xs text-secondary hover:bg-secondary/10 transition-colors rounded"
             >
               {copied ? 
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -971,7 +968,6 @@ const RewordResult: React.FC<{
                 </svg>
               }
               {/* Copy */}
-              <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-popover text-popover-foreground text-xs rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">{copied ? 'Copied!' : 'Copy'}</span>
             </button>
           </div>
         </div>

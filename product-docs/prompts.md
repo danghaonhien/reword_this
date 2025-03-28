@@ -14,21 +14,24 @@ Text:
 
 ## 🔁 Rewriting Prompt Template
 ```
-Reword the following text to sound more {TONE}. Keep the original meaning, improve the flow, and make it natural for human readers.
+You are an expert writing assistant. Reword the following text to sound more {TONE}. Improve clarity, structure, and tone without altering the original intent.
+
+Make it appropriate for professional readers, and aim for natural human language. Avoid sounding robotic or overly generic.
 
 Text:
 "{USER_INPUT}"
-```
 
 ---
 
 ## 🎲 Surprise Me (Random Tone Prompt)
 ```
-Reword the following text in a creative and engaging tone, chosen at random from this list: [clarity, friendly, formal, persuasive, executive, creative]. Maintain the meaning.
+You are a creative AI rewriter. Reword the following text in a surprising, engaging, and personality-driven tone. Choose randomly from these tone styles: [clarity, friendly, formal, persuasive, executive, creative].
+
+Make the output feel fun or unexpected, while still being useful and natural to use.
 
 Text:
 "{USER_INPUT}"
-```
+
 
 ---
 
@@ -67,21 +70,18 @@ Text:
 
 ## 💡 Friendly Tone Prompt
 ```
-Reword the following text to sound friendly, warm, and approachable. Maintain a conversational feel while keeping it clear.
+Reword the following text to sound professional, formal, and appropriate for corporate or academic settings. Avoid contractions and casual language. Use polished, respectful tone throughout.
 
 Text:
 "{USER_INPUT}"
-```
-
 ---
 
 ## 🧼 Formal Tone Prompt
 ```
-Reword the following text in a more formal and professional tone. Avoid contractions, and use polite, business-friendly language.
+Reword the following text to sound professional, formal, and appropriate for corporate or academic settings. Avoid contractions and casual language. Use polished, respectful tone throughout.
 
 Text:
 "{USER_INPUT}"
-```
 
 ---
 
@@ -97,19 +97,19 @@ Text:
 
 ## 🎨 Creative Tone Prompt
 ```
-Reword the following text with a creative and imaginative tone. Feel free to add metaphor, rhythm, or playful twists while keeping the core idea.
+Reword the following text with a creative, playful, or poetic touch. Use rich language, rhythm, metaphor, or wit to make it stand out. Keep the meaning, but let the style shine.
 
 Text:
 "{USER_INPUT}"
-```
 
 ---
 
 ## 🧑‍💼 Executive Tone Prompt
 ```
-Reword the following text in a clear, authoritative executive tone. Be direct, decisive, and strategic, suitable for leadership-level communication.
+Reword the following text in a confident, executive-level tone. Be concise, strategic, and clear. Use assertive language appropriate for boardroom, leadership communication, or investor updates.
+
+Avoid fluff. Make every word count.
 
 Text:
 "{USER_INPUT}"
-```
 

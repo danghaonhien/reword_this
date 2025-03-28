@@ -4,37 +4,37 @@
 export const getPromptForTone = (tone: string, text: string): string => {
   switch (tone) {
     case 'clarity':
-      return `Reword the following text to be clearer and more concise. Remove unnecessary words and simplify without losing meaning.
+      return `Reword the following text to improve clarity and simplicity. Eliminate jargon, reduce sentence complexity, and make it more direct and readable.
 
 Text:
 "${text}"`;
     
     case 'friendly':
-      return `Reword the following text to sound friendly, warm, and approachable. Maintain a conversational feel while keeping it clear.
+      return `Reword the following text to sound warm, friendly, and conversational — like a helpful colleague or friend. Use inclusive and positive language, and avoid formal or robotic phrasing.
 
 Text:
 "${text}"`;
     
     case 'formal':
-      return `Reword the following text in a more formal and professional tone. Avoid contractions, and use polite, business-friendly language.
+      return `Reword the following text to sound professional, formal, and appropriate for corporate or academic settings. Avoid contractions and casual language. Use polished, respectful tone throughout.
 
 Text:
 "${text}"`;
     
     case 'gen_z':
-      return `Reword the following text to sound like Gen Z language. Use modern internet slang, casual tone, abbreviations, and appropriate emojis. Make it sound authentic but still understandable.
+      return `Reword the following text to sound like Gen Z language. Use modern internet slang, casual tone, abbreviations, and appropriate emojis. Include trendy expressions like "no cap", "slay", "based", "lowkey/highkey", "vibe check", "I'm dead", "main character energy", or "living rent free". Use the occasional all-lowercase style and add relevant hashtags if appropriate. Make it sound authentic to how Gen Z communicates online but still understandable.
 
 Text:
 "${text}"`;
     
     case 'executive':
-      return `Reword the following text for executive-level communication. Be direct, authoritative, and focus on key points. Use decisive language.
+      return `Reword the following text in a confident, executive-level tone. Be concise, strategic, and clear. Use assertive language appropriate for boardroom, leadership communication, or investor updates.
 
 Text:
 "${text}"`;
     
     case 'creative':
-      return `Reword the following text to be creative and imaginative. Use expressive language, metaphors, or unique perspectives to make it engaging.
+      return `Reword the following text with a creative, playful, or poetic touch. Use rich language, rhythm, metaphor, or wit to make it stand out. Keep the meaning, but let the style shine.
 
 Text:
 "${text}"`;
