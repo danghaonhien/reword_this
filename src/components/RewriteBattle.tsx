@@ -143,6 +143,10 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
     const tone = version === 'A' ? tonePair.a.name.toLowerCase() : tonePair.b.name.toLowerCase();
     saveToHistory(originalText, textToCopy, tone);
     
+    // Check if user has already selected a version today
+    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+    const lastVersionSelectedDate = localStorage.getItem('last-battle-version-selected-date');
+    
     // Track battle in gameification system with explicit tone IDs
     if (version === 'A') {
       // Convert tone name to lowercase ID format for tracking
@@ -150,12 +154,24 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
       const loserTone = tonePair.b.name.toLowerCase().replace(/\s+/g, '_');
       trackBattle(winnerTone, loserTone);
       
+      // Add XP only if user hasn't selected a version today
+      if (lastVersionSelectedDate !== today) {
+        addXP(10); // Only add XP once per day
+        localStorage.setItem('last-battle-version-selected-date', today);
+      }
+      
       // Add extra feedback to confirm the battle is tracked
       console.log(`Battle tracked: ${winnerTone} wins over ${loserTone}`);
     } else {
       const winnerTone = tonePair.b.name.toLowerCase().replace(/\s+/g, '_');
       const loserTone = tonePair.a.name.toLowerCase().replace(/\s+/g, '_');
       trackBattle(winnerTone, loserTone);
+      
+      // Add XP only if user hasn't selected a version today
+      if (lastVersionSelectedDate !== today) {
+        addXP(10); // Only add XP once per day
+        localStorage.setItem('last-battle-version-selected-date', today);
+      }
       
       // Add extra feedback to confirm the battle is tracked
       console.log(`Battle tracked: ${winnerTone} wins over ${loserTone}`);

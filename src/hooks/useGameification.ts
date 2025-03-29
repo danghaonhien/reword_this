@@ -635,7 +635,6 @@ export function useGameification(): GameificationResult {
   }
 
   const trackBattle = (winner: string, loser: string) => {
-    addXP(10); // Add XP for battles
     gameificationService.updateMissions('battle', 1); 
   }
 
