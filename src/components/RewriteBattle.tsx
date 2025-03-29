@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { CopyIcon, CheckIcon, RefreshCw, ChevronDown, ChevronUp } from 'lucide-react'
 import { useGameification } from '../hooks/useGameification'
 import { getBattlePrompt } from '@/utils/promptUtils'
@@ -42,6 +42,11 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
   // Use usage limits to track battle usage
   const usageLimits = useUsageLimits()
   
+  // Create refs for scrollable containers
+  const versionARef = useRef<HTMLDivElement>(null)
+  const versionBRef = useRef<HTMLDivElement>(null)
+  const originalTextRef = useRef<HTMLDivElement>(null)
+
   // Check usage limits when the component mounts
   useEffect(() => {
     // When the battle component mounts, check if user has already used their daily limit
@@ -271,7 +276,10 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
               </button>
               
               {showOriginal && (
-                <div className="p-3 mt-1 bg-muted/20 rounded-md border border-border max-h-48 overflow-y-auto custom-scrollbar">
+                <div 
+                  ref={originalTextRef}
+                  className="p-3 mt-1 bg-muted/20 rounded-md border border-border max-h-48 overflow-y-auto custom-scrollbar"
+                >
                   <p className="text-sm text-muted-foreground whitespace-pre-wrap">{originalText}</p>
                 </div>
               )}
@@ -280,7 +288,7 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
         </div>
       ) : (
         <>
-          <div className="flex items-center justify-between mb-3 sticky top-0 bg-background pt-1 pb-2 ">
+          <div className="flex items-center justify-between mb-3 sticky top-0 bg-background pt-1 pb-2 z-10 border-b border-border">
             <h3 className="text-sm font-medium">Choose Your Favorite Version</h3>
             <button 
               onClick={generateBattle}
@@ -313,9 +321,12 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
               <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
             </div>
           ) : (
-            <div className="flex flex-col gap-4 pb-16">
+            <div className="flex flex-col gap-4 pb-4 max-h-[calc(100vh-160px)] overflow-y-auto custom-scrollbar pr-1">
               {/* Version A */}
-              <div className={`p-3 border rounded-md ${selectedVersion === 'A' ? 'border-primary bg-primary/5' : 'border-border'}`}>
+              <div 
+                ref={versionARef}
+                className={`p-3 border rounded-md ${selectedVersion === 'A' ? 'border-primary bg-primary/5' : 'border-border'}`}
+              >
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <span className="text-xs font-medium px-2 py-0.5 bg-secondary/20 rounded-full">{tonePair.a.name} Tone</span>
@@ -326,7 +337,9 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
                     <span className="text-xs font-medium">Selected</span>
                   </div>
                 </div>
-                <p className="text-sm mt-2">{versionA}</p>
+                <div className="text-sm mt-2 overflow-y-visible pr-1">
+                  <p className="whitespace-pre-wrap">{versionA}</p>
+                </div>
                 <button
                   onClick={() => selectVersion('A')}
                   className="mt-3 w-full py-1 px-2 text-xs bg-secondary text-secondary-foreground rounded-md 
@@ -346,7 +359,10 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
               </div>
 
               {/* Version B */}
-              <div className={`p-3 border rounded-md ${selectedVersion === 'B' ? 'border-primary bg-primary/5' : 'border-border'}`}>
+              <div 
+                ref={versionBRef}
+                className={`p-3 border rounded-md ${selectedVersion === 'B' ? 'border-primary bg-primary/5' : 'border-border'}`}
+              >
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <span className="text-xs font-medium px-2 py-0.5 bg-accent/20 rounded-full">{tonePair.b.name} Tone</span>
@@ -357,7 +373,9 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
                     <span className="text-xs font-medium">Selected</span>
                   </div>
                 </div>
-                <p className="text-sm mt-2">{versionB}</p>
+                <div className="text-sm mt-2 overflow-y-visible pr-1">
+                  <p className="whitespace-pre-wrap">{versionB}</p>
+                </div>
                 <button
                   onClick={() => selectVersion('B')}
                   className="mt-3 w-full py-1 px-2 text-xs bg-accent text-accent-foreground rounded-md 
@@ -387,7 +405,10 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
                 </button>
                 
                 {showOriginal && (
-                  <div className="p-3 mt-1 bg-muted/20 rounded-md border border-border max-h-48 overflow-y-auto custom-scrollbar">
+                  <div 
+                    ref={originalTextRef}
+                    className="p-3 mt-1 bg-muted/20 rounded-md border border-border max-h-48 overflow-y-auto custom-scrollbar"
+                  >
                     <p className="text-sm text-muted-foreground whitespace-pre-wrap">{originalText}</p>
                   </div>
                 )}
@@ -400,4 +421,4 @@ const RewriteBattle: React.FC<RewriteBattleProps> = ({ originalText, onRewriteAg
   )
 }
 
-export default RewriteBattle 
+export default RewriteBattle
